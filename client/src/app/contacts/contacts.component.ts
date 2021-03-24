@@ -1,3 +1,4 @@
+import { DialogService } from './../shared/dialog.service';
 import { EditcontactComponent } from './../editcontact/editcontact.component';
 import { ContactComponent } from './contact/contact.component';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,7 +9,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ContactService } from './../shared/contact.service';
 import { Contact } from '../shared/contact.model';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-contacts',
@@ -32,7 +33,10 @@ export class ContactsComponent implements OnInit {
   width = "40%";
   height = "65%";
 
-  constructor(private dialog: MatDialog, public contactService : ContactService, private fb : FormBuilder) {
+  constructor(private dialog: MatDialog, 
+              public contactService : ContactService,
+              private fb : FormBuilder,
+              private dialogService: DialogService) {
     
     this.first_name = '',
     this.last_name = '',
@@ -77,11 +81,20 @@ export class ContactsComponent implements OnInit {
   }
 
   deleteContact(row: any) {
-    console.log(row);
-    this.contactService.deleteContact(row._id)
-    .subscribe(
-      () => console.log("record deleted")
-    );
+    // console.log(row);
+    // this.contactService.deleteContact(row._id)
+    // .subscribe(
+    //   () => console.log("record deleted")
+    // );
+
+    this.dialogService.openConfirmDialog()
+      .afterClosed().subscribe(res => {        
+        if(res){
+         this.contactService.deleteContact(row._id)
+          .subscribe(() => console.log("Contact deleted"));
+       }
+      });
+    
   }
 
   newContact(): void

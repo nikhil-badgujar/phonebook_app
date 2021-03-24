@@ -1,3 +1,5 @@
+import { MatIconModule } from '@angular/material/icon'
+import { DialogService } from './shared/dialog.service';
 import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';  
 import { ContactService } from './shared/contact.service';
@@ -12,13 +14,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContactComponent } from './contacts/contact/contact.component';
 import { MatTableModule } from '@angular/material/table';
 import { EditcontactComponent } from './editcontact/editcontact.component';
+import { MatconfirmdialogComponent } from './matconfirmdialog/matconfirmdialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactsComponent,
     ContactComponent,
-    EditcontactComponent
+    EditcontactComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -29,10 +33,13 @@ import { EditcontactComponent } from './editcontact/editcontact.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatTableModule,    
+    MatIconModule,
   ],
   providers: [
-    ContactService
+    ContactService,
+    DialogService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [MatconfirmdialogComponent]
 })
 export class AppModule { }

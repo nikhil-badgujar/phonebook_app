@@ -23,7 +23,8 @@ export class ContactComponent implements OnInit {
 
   constructor(public contactService: ContactService, 
               private fb: FormBuilder,
-              public dialog: MatDialog) { 
+              public dialog: MatDialog,
+              public dialogRef: MatDialogRef<Contact>) { 
 
     this.buildContactForm();
     
@@ -45,7 +46,7 @@ export class ContactComponent implements OnInit {
     console.log(this.contactService.form.value);
     this.contactService.addContact(this.contactService.form.value)
       .subscribe((d) => console.log(d));
-    
+    this.dialogRef.close();
   }
 
   reload(){
