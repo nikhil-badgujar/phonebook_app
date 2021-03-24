@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~material-design-icons/iconfont/material-icons.css';
+
+div.container{
+    margin: 0px 40px;
+}
+
+.fill-remaining-space{
+    flex: 1 1 auto;
+}
+
+form.normal-form{
+    height: 20%;
+    width: 50%;
+    margin: 10px;
+    padding: 0%;
+}
+
+.controles-container{
+    width: 70%;
+    padding: 5%;
+}
+
+.controles-container > *{
+    width: 100%;
+}
+
+.button-row button{
+    margin: 5px;
+}

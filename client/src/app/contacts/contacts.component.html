@@ -1,0 +1,79 @@
+<!-- <p>contacts works!</p>
+
+<div class="container">
+    <div *ngFor="let item of contacts">
+        <div class="col-md-3">
+            {{item.first_name}}
+        </div>        
+        <div class="col-md-3">
+            {{item.last_name}}
+        </div>        
+        <div class="col-md-3">
+            {{item.phone}}
+        </div>        
+    </div>
+</div> -->
+
+<div class="container">
+    <mat-toolbar>
+        <span class="fill-remaining-space"></span>
+        <span>Phonebook Application</span>
+        <span class="fill-remaining-space"></span>
+    </mat-toolbar>
+    
+    <!-- <app-contact></app-contact> -->
+
+    <!-- <mat-form-field>
+                <mat-label>Find</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. name" #input>
+    </mat-form-field>  -->
+          
+    <button mat-button color='primary' (click)='newContact()'>Add New Contact</button>
+    <div class="mat-elevation-z8 all-contact">        
+        <table mat-table [formGroup]="contactService.form" [dataSource]="dataSource" matSort>
+            <!-- first name Column -->
+            <ng-container class="dist" matColumnDef="first_name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+                <td mat-cell *matCellDef="let row"> {{row.first_name}} </td>
+            </ng-container>
+            
+            <!-- last name Column -->
+            <ng-container class="dist" matColumnDef="last_name">
+                <th mat-header-cell *matHeaderCellDef > Last Name </th>
+                <td mat-cell *matCellDef="let row"> {{row.last_name}} </td>
+            </ng-container>
+            
+            <!-- Phone Column -->
+            <ng-container class="dist" matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef > Phone </th>
+                <td mat-cell *matCellDef="let row"> {{row.phone}} </td>
+            </ng-container>
+            
+            <!-- action Column -->
+            <ng-container class="dist" matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef >Actions</th>
+                <td mat-cell *matCellDef="let row">
+                    <button mat-icon-button (click)="editContact(row)">
+                        <mat-icon>launch</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="deleteContact(row)" color="warn">
+                        <span class="material-icons">delete</span>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter </td>
+            </tr>
+
+        </table>
+
+        <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5"></mat-paginator> -->
+        
+    </div>
+
+</div>

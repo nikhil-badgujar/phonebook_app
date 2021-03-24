@@ -1,0 +1,28 @@
+
+<form method="POST" [formGroup]="contactService.form" class="normal-form" (ngSubmit)="onSubmit()">
+    <h3>Add New Contact</h3>
+    <mat-grid-list cols="1" rowheight="0px">
+        <mat-grid-tile>
+
+            <div class="controles-container">
+                <mat-form-field>
+                    <input formControlName="first_name" type="text" matInput placeholder="First Name*">
+                    <mat-error>This field is mandatory.</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="last_name" type="text" matInput placeholder="Last Name">
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="phone" type="text" matInput placeholder="Phone Number*">
+                    <mat-error *ngIf="contactService.form.controls['phone'].errors?.required">This field is mandatory.</mat-error>
+                    <mat-error *ngIf="contactService.form.controls['phone'].errors?.minlength">Minimum 10 characters needed.</mat-error>
+                    <mat-error *ngIf="contactService.form.controls['phone'].errors?.maxlength">Number should contain 10 characters only.</mat-error>
+                </mat-form-field>
+                <div class="button-row">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="contactService.form.invalid">Save</button>
+                    <button mat-raised-button color="warn" type="reset">Clear</button>                 
+                </div>
+            </div>            
+        </mat-grid-tile>
+    </mat-grid-list>
+</form>
